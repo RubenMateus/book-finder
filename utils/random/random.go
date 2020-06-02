@@ -1,23 +1,22 @@
 package random
 
 import (
-	"math/rand"
-	"crypto/rand"
+	crypto "crypto/rand"
 	"fmt"
 	"io"
+	math "math/rand"
 )
-
 
 // RandomInt generates a random int, based on a min and max values
 func RandomInt(min, max int) int {
-	return min + rand.Intn(max-min)
+	return min + math.Intn(max-min)
 }
 
 // Generate a random UUID according to RFC 4122
 func NewUUID() (string, error) {
 	uuid := make([]byte, 16)
 
-	n, err := io.ReadFull(rand.Reader, uuid)
+	n, err := io.ReadFull(crypto.Reader, uuid)
 	if n != len(uuid) || err != nil {
 		return "", err
 	}
